@@ -32,29 +32,32 @@ def Test():
     h = float(x[1]-x[0])
 
     Yi = [] # Пятые производные
-    Yi.append(1/(12*h)*(0-3*Lagrandj(x[0]+4*h)+16*Lagrandj(x[0]+3*h)-36*Lagrandj(x[0]+2*h)+48*Lagrandj(x[0]+1*h)-25*Lagrandj(x[0])))
+    Yi.append(1/(12*h)*(-3*Lagrandj(x[4])+16*Lagrandj(x[3])-36*Lagrandj(x[2])+48*Lagrandj(x[1])-25*Lagrandj(x[0])))
     h = float(x[1]-x[0])
-    Yi.append(1/(12*h)*(0-3*Lagrandj(x[1]+4*h)+16*Lagrandj(x[1]+3*h)-36*Lagrandj(x[1]+2*h)+48*Lagrandj(x[1]+1*h)-25*Lagrandj(x[1])))
+    Yi.append(1/(12*h)*(-3*Lagrandj(x[5])+16*Lagrandj(x[3])-36*Lagrandj(x[3])+48*Lagrandj(x[2])-25*Lagrandj(x[1])))
 
     for i in  range(2, k-2):
         h = (x[i + 2] - x[i - 2]) / 4
-        Yi.append((-Lagrandj(x[i] - 2 * h) - 8 * Lagrandj(x[i] - 1 * h) + 8 * Lagrandj(x[i] + 1 * h) + Lagrandj(x[i] + 2 * h)) / (12 * h))
+        Yi.append((Lagrandj(x[i-2]) - 8 * Lagrandj(x[i-1]) + 8 * Lagrandj(x[i+1]) - Lagrandj(x[i+2])) / (12 * h))
 
-    h = (x[k - 2] - x[k - 6]) / 4
-    Yi.append(1 / (12 * h) * (3 * Lagrandj(x[k - 2] - 4 * h) - 16 * Lagrandj(x[k - 2] - 3 * h) + 36 * Lagrandj(x[k - 2] - 2 * h) - 48 * Lagrandj(x[k - 2] - 1 * h) + 25 * Lagrandj(x[k - 2])))
-    h = (x[k - 1] - x[k - 5]) / 4
-    Yi.append(1 / (12 * h) * (3 * Lagrandj(x[k - 1] - 4 * h) - 16 * Lagrandj(x[k - 1] - 3 * h) + 36 * Lagrandj(x[k - 1] - 2 * h) - 48 * Lagrandj(x[k - 1] - 1 * h) + 25 * Lagrandj(x[k - 1])))
+    # h = (x[-2] - x[-6]) / 4
+    h = x[-2] - x[-3]
+    Yi.append(1 / (12 * h) * (3 * Lagrandj(x[-6]) - 16 * Lagrandj(x[-5]) + 36 * Lagrandj(x[-4]) - 48 * Lagrandj(x[-3]) + 25 * Lagrandj(x[-2])))
+    # h = (x[-1] - x[-5]) / 4
+    h = x[-1] - x[-2]
+    Yi.append(1 / (12 * h) * (3 * Lagrandj(x[-5]) - 16 * Lagrandj(x[-4]) + 36 * Lagrandj(x[-3]) - 48 * Lagrandj(x[-2]) + 25 * Lagrandj(x[-1])))
 
     Yj = [] # Третьи производные
     h = x[1] - x[0]
-    Yj.append(1/(2*(x[1]-x[0]))*(-Lagrandj(x[0]+2*h)+4*Lagrandj(x[0]+1*h)-3*Lagrandj(x[0])))
+    Yj.append(1/(2*(x[1]-x[0]))*(-Lagrandj(x[2])+4*Lagrandj(x[1])-3*Lagrandj(x[0])))
 
     for i in range(1, k-1):
         h = (x[i + 1] - x[i - 1]) / 2
-        Yj.append((1/(2 * h)) * (-Lagrandj(x[i]-1*h)+Lagrandj(x[i]+1*h)))
+        Yj.append((1/(2 * h)) * (-Lagrandj(x[i-1])+Lagrandj(x[i+1])))
 
-    h = x[k - 1] - x[k - 2]
-    Yj.append(1/((x[k-1]-x[k-3]))*(Lagrandj(x[k-1]-2*h)-4*Lagrandj(x[k-1]-1*h)+3*Lagrandj(x[k-1])))
+    # h = (x[-1] - x[-3])/ 2
+    h = x[-1] - x[-2]
+    Yj.append(1/(h)*(Lagrandj(x[-3])-4*Lagrandj(x[-2])+3*Lagrandj(x[-1])))
     draw(x, y, Yj, Yi)
     # thread.start()
 def formula():
@@ -65,36 +68,36 @@ def formula():
     h = float(x[1]-x[0])
     Yi = [] # Пятые производные
     fin += [rf"Пятые производные: "]
-    fin += [rf"$y_{0}^'=\frac{{-3({round(Lagrandj(x[0]+4*h),2)})+16({round(Lagrandj(x[0]+3*h),2)})-36({round(Lagrandj(x[0]+2*h),2)})+48({round(Lagrandj(x[0]+1*h),2)})-25({round(Lagrandj(x[0]),2)})}}{{12({(round(h,2))})}}$"]
+    fin += [rf"$y_{0}^'=\frac{{-3({round(Lagrandj(x[4]),2)})+16({round(Lagrandj(x[3]),2)})-36({round(Lagrandj(x[2]),2)})+48({round(Lagrandj(x[1]),2)})-25({round(Lagrandj(x[0]),2)})}}{{12({(round(h,2))})}}$"]
     Yi.append(1/(12*h)*(0-3*Lagrandj(x[0]+4*h)+16*Lagrandj(x[0]+3*h)-36*Lagrandj(x[0]+2*h)+48*Lagrandj(x[0]+1*h)-25*Lagrandj(x[0])))
     h = float(x[1]-x[0])
-    fin += [rf"$y_{1}^'=\frac{{-3({round(Lagrandj(x[1] + 4 * h),2)})+16({round(Lagrandj(x[1] + 3 * h),2)})-36({round(Lagrandj(x[1] + 2 * h),2)})+48({round(Lagrandj(x[1] + 1 * h),2)})-25({round(Lagrandj(x[1]),2)})}}{{12({round(h,2)})}}$"]
+    fin += [rf"$y_{1}^'=\frac{{-3({round(Lagrandj(x[5]),2)})+16({round(Lagrandj(x[4]),2)})-36({round(Lagrandj(x[3]),2)})+48({round(Lagrandj(x[2]),2)})-25({round(Lagrandj(x[1]),2)})}}{{12({round(h,2)})}}$"]
     Yi.append(1/(12*h)*(0-3*Lagrandj(x[1]+4*h)+16*Lagrandj(x[1]+3*h)-36*Lagrandj(x[1]+2*h)+48*Lagrandj(x[1]+1*h)-25*Lagrandj(x[1])))
 
     for i in  range(2, k-2):
         h = (x[i + 2] - x[i - 2]) / 4
-        fin += [rf"$y_{i}^'=\frac{{-({round(Lagrandj(x[i] - 2 * h), 2)})-8({round(Lagrandj(x[i] - 1 * h), 2)})+8({round(Lagrandj(x[i] + 1 * h), 2)})+({round(Lagrandj(x[i] + 2 * h), 2)})}}{{12({round(h, 2)})}}$"]
+        fin += [rf"$y_{i}^'=\frac{{({round(Lagrandj(x[i-2]), 2)})-8({round(Lagrandj(x[i-1]), 2)})+8({round(Lagrandj(x[i+1]), 2)})-({round(Lagrandj(x[i+2]), 2)})}}{{12({round(h, 2)})}}$"]
         Yi.append((-Lagrandj(x[i] - 2 * h) - 8 * Lagrandj(x[i] - 1 * h) + 8 * Lagrandj(x[i] + 1 * h) + Lagrandj(x[i] + 2 * h)) / (12 * h))
 
     h = (x[k - 2] - x[k - 6]) / 4
-    fin += [rf"$y_{{{10}}}^'=\frac{{3({round(Lagrandj(x[k - 2]-4*h),2)})-16({round(Lagrandj(x[k - 2]-3*h),2)})+36({round(Lagrandj(x[k - 2]-2*h),2)})-48({round(Lagrandj(x[k - 2]-1*h),2)})+25({round(Lagrandj(x[k - 2]),2)})}}{{12({(round(h,2))})}}$"]
+    fin += [rf"$y_{{{10}}}^'=\frac{{3({round(Lagrandj(x[-6]),2)})-16({round(Lagrandj(x[-5]),2)})+36({round(Lagrandj(x[-4]),2)})-48({round(Lagrandj(x[-3]),2)})+25({round(Lagrandj(x[-2]),2)})}}{{12({(round(h,2))})}}$"]
     Yi.append(1 / (12 * h) * (3 * Lagrandj(x[k - 2] - 4 * h) - 16 * Lagrandj(x[k - 2] - 3 * h) + 36 * Lagrandj(x[k - 2] - 2 * h) - 48 * Lagrandj(x[k - 2] - 1 * h) + 25 * Lagrandj(x[k - 2])))
     h = (x[k - 1] - x[k - 5]) / 4
-    fin += [rf"$y_{{{11}}}^'=\frac{{3({round(Lagrandj(x[k - 1]-4*h),2)})-16({round(Lagrandj(x[k - 1]-3*h),2)})+36({round(Lagrandj(x[k - 1]-2*h),2)})-48({round(Lagrandj(x[k - 1]-1*h),2)})+25({round(Lagrandj(x[k - 1]),2)})}}{{12({(round(h,2))})}}$"]
+    fin += [rf"$y_{{{11}}}^'=\frac{{3({round(Lagrandj(x[-5]),2)})-16({round(Lagrandj(x[-4]),2)})+36({round(Lagrandj(x[-3]),2)})-48({round(Lagrandj(x[-2]),2)})+25({round(Lagrandj(x[-1]),2)})}}{{12({(round(h,2))})}}$"]
     Yi.append(1 / (12 * h) * (3 * Lagrandj(x[k - 1] - 4 * h) - 16 * Lagrandj(x[k - 1] - 3 * h) + 36 * Lagrandj(x[k - 1] - 2 * h) - 48 * Lagrandj(x[k - 1] - 1 * h) + 25 * Lagrandj(x[k - 1])))
 
     Yj = [] # Третьи производные
     fin += [rf"Третьи производные: "]
     h = x[1] - x[0]
     Yj.append(1/(2*(x[1]-x[0]))*(-Lagrandj(x[0]+2*h)+4*Lagrandj(x[0]+1*h)-3*Lagrandj(x[0])))
-    fin += [rf"$y_{0}^'=\frac{{-({round(Lagrandj(x[0]+2*h),2)})+4({round(Lagrandj(x[0]+1*h),2)})-3({round(Lagrandj(x[0]),2)})}}{{2({(round(h,2))})}}$"]
+    fin += [rf"$y_{0}^'=\frac{{-({round(Lagrandj(x[2]),2)})+4({round(Lagrandj(x[1]),2)})-3({round(Lagrandj(x[0]),2)})}}{{2({(round(h,2))})}}$"]
     for i in range(1, k-1):
         h = (x[i + 1] - x[i - 1]) / 2
-        fin += [rf"$y_{{{i}}}^'=\frac{{-({round(Lagrandj(x[i]-1*h), 2)})+({round(Lagrandj(x[i]+1*h), 2)})}}{{2({(round(h, 2))})}}$"]
+        fin += [rf"$y_{{{i}}}^'=\frac{{-({round(Lagrandj(x[i-1]), 2)})+({round(Lagrandj(x[i+1]), 2)})}}{{2({(round(h, 2))})}}$"]
         Yj.append(1/((x[i+1]-x[i-1]))*(-Lagrandj(x[i]-1*h)+Lagrandj(x[i]+1*h)))
 
     h = x[k - 1] - x[k - 2]
-    fin += [rf"$y_{{{11}}}^'=\frac{{-({round(Lagrandj(x[k-1]-2*h), 2)})-4({round(Lagrandj(x[k-1]-1*h), 2)})+3({round(Lagrandj(x[k-1]), 2)})}}{{2({(round(h, 2))})}}$"]
+    fin += [rf"$y_{{{11}}}^'=\frac{{({round(Lagrandj(x[-3]), 2)})-4({round(Lagrandj(x[-2]), 2)})+3({round(Lagrandj(x[-1]), 2)})}}{{2({(round(h, 2))})}}$"]
     Yj.append(1/((x[k-1]-x[k-3]))*(Lagrandj(x[k-1]-2*h)-4*Lagrandj(x[k-1]-1*h)+3*Lagrandj(x[k-1])))
 
     root = tk.Toplevel()
