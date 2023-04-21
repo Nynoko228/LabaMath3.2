@@ -51,7 +51,7 @@ def Test():
 
     for i in range(1, k-1):
         h = (x[i + 1] - x[i - 1]) / 2
-        Yj.append(1/((x[i+1]-x[i-1]))*(-Lagrandj(x[i]-1*h)+Lagrandj(x[i]+1*h)))
+        Yj.append((1/(2 * h)) * (-Lagrandj(x[i]-1*h)+Lagrandj(x[i]+1*h)))
 
     h = x[k - 1] - x[k - 2]
     Yj.append(1/((x[k-1]-x[k-3]))*(Lagrandj(x[k-1]-2*h)-4*Lagrandj(x[k-1]-1*h)+3*Lagrandj(x[k-1])))
@@ -97,12 +97,7 @@ def formula():
     fin += [rf"$y_{{{11}}}^'=\frac{{-({round(Lagrandj(x[k-1]-2*h), 2)})-4({round(Lagrandj(x[k-1]-1*h), 2)})+3({round(Lagrandj(x[k-1]), 2)})}}{{2({(round(h, 2))})}}$"]
     Yj.append(1/((x[k-1]-x[k-3]))*(Lagrandj(x[k-1]-2*h)-4*Lagrandj(x[k-1]-1*h)+3*Lagrandj(x[k-1])))
 
-    # data = podgonka(x, y)
-    # fin =  rf"${data[0][0]}*a_{0}+{data[0][1]}*a_{1} + {data[0][2]}*a_{2}={data[0][3]};$"
-    # fin += rf" ${data[1][0]}*a_{0}+{data[1][1]}*a_{1} + {data[1][2]}*a_{2}={data[1][3]};$"
-    # fin += rf" ${data[2][0]}*a_{0}+{data[2][1]}*a_{1} + {data[2][2]}*a_{2}={data[2][3]};$"
     root = tk.Toplevel()
-    # root = tk.Tk()
     app = Application(fin, master=root)
     app.mainloop()
 
