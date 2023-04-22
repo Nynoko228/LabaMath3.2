@@ -32,32 +32,32 @@ def Test():
     h = float(x[1]-x[0])
 
     Yi = [] # Пятые производные
-    Yi.append(1/(12*h)*(-3*Lagrandj(x[4])+16*Lagrandj(x[3])-36*Lagrandj(x[2])+48*Lagrandj(x[1])-25*Lagrandj(x[0])))
+    Yi.append(1/(12*round(h,2))*(-3*round(Lagrandj(x[4]),2)+16*round(Lagrandj(x[3]),2)-36*round(Lagrandj(x[2]),2)+48*round(Lagrandj(x[1]),2)-25*round(Lagrandj(x[0]),2)))
     h = float(x[1]-x[0])
-    Yi.append(1/(12*h)*(-3*Lagrandj(x[5])+16*Lagrandj(x[3])-36*Lagrandj(x[3])+48*Lagrandj(x[2])-25*Lagrandj(x[1])))
+    Yi.append(1/(12*round(h,2))*(-3*round(Lagrandj(x[5]),2)+16*round(Lagrandj(x[3]),2)-36*round(Lagrandj(x[3]),2)+48*round(Lagrandj(x[2]),2)-25*round(Lagrandj(x[1]),2)))
 
-    for i in  range(2, k-2):
+    for i in range(2, k-2):
         h = (x[i + 2] - x[i - 2]) / 4
-        Yi.append((Lagrandj(x[i-2]) - 8 * Lagrandj(x[i-1]) + 8 * Lagrandj(x[i+1]) - Lagrandj(x[i+2])) / (12 * h))
+        Yi.append((round(Lagrandj(x[i-2]),2) - 8 * round(Lagrandj(x[i-1]),2) + 8 * round(Lagrandj(x[i+1]),2) - round(Lagrandj(x[i+2]),2)) / (12 * h))
 
     # h = (x[-2] - x[-6]) / 4
     h = x[-2] - x[-3]
-    Yi.append(1 / (12 * h) * (3 * Lagrandj(x[-6]) - 16 * Lagrandj(x[-5]) + 36 * Lagrandj(x[-4]) - 48 * Lagrandj(x[-3]) + 25 * Lagrandj(x[-2])))
+    Yi.append(1 / (12 * round(h,2)) * (3 * round(Lagrandj(x[-6]),2) - 16 * round(Lagrandj(x[-5]),2) + 36 * round(Lagrandj(x[-4]),2) - 48 * round(Lagrandj(x[-3]),2) + 25 * round(Lagrandj(x[-2]),2)))
     # h = (x[-1] - x[-5]) / 4
     h = x[-1] - x[-2]
-    Yi.append(1 / (12 * h) * (3 * Lagrandj(x[-5]) - 16 * Lagrandj(x[-4]) + 36 * Lagrandj(x[-3]) - 48 * Lagrandj(x[-2]) + 25 * Lagrandj(x[-1])))
+    Yi.append(1 / (12 * round(h,2)) * (3 * round(Lagrandj(x[-5]),2) - 16 * round(Lagrandj(x[-4]),2) + 36 * round(Lagrandj(x[-3]),2) - 48 * round(Lagrandj(x[-2]),2) + 25 * round(Lagrandj(x[-1]),2)))
 
     Yj = [] # Третьи производные
     h = x[1] - x[0]
-    Yj.append(1/(2*(x[1]-x[0]))*(-Lagrandj(x[2])+4*Lagrandj(x[1])-3*Lagrandj(x[0])))
+    Yj.append(1/(2*round(h,2))*(-round(Lagrandj(x[2]),2)+4*round(Lagrandj(x[1]),2)-3*round(Lagrandj(x[0]),2)))
 
     for i in range(1, k-1):
         h = (x[i + 1] - x[i - 1]) / 2
-        Yj.append((1/(2 * h)) * (-Lagrandj(x[i-1])+Lagrandj(x[i+1])))
+        Yj.append((1/(2 * h)) * (-round(Lagrandj(x[i-1]),2)+round(Lagrandj(x[i+1]),2)))
 
     # h = (x[-1] - x[-3])/ 2
     h = x[-1] - x[-2]
-    Yj.append(1/(h)*(Lagrandj(x[-3])-4*Lagrandj(x[-2])+3*Lagrandj(x[-1])))
+    Yj.append(1/(2*round(h,2))*(round(Lagrandj(x[-3]),2)-4*round(Lagrandj(x[-2]),2)+3*round(Lagrandj(x[-1]),2)))
     draw(x, y, Yj, Yi)
     # thread.start()
 def formula():
