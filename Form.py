@@ -22,7 +22,7 @@ class Application(tk.Frame):
             # Creating buffer for storing image in memory
             buffer = BytesIO()
             # Writing png image with our rendered greek alpha to buffer
-            math_to_image(self.fin[i], buffer, dpi=220, format='png')
+            math_to_image(self.fin[i], buffer, dpi=225, format='png')
             # Remoting bufeer to 0, so that we can read from it
             buffer.seek(0)
             # Creating Pillow image object from it
